@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/styles.css"> 
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;500;700&display=swap" rel="stylesheet"> 
+    <title>Calculadora de imc</title>
+</head>
+<body>
+    <section class="flex-container">
+        <div class="flex-item-1">
+            <div class="text">
+
+                <h1>IMC</h1>
+
+                <div class="box">
+                <h2>O que é?</h2>
+                <p>A classificação do índice de massa corporal (IMC), pode ajudar a identificar obesidade ou desnutrição em crianças, adolescentes, adultos e idosos.</p>
+                </div><!--box-->
+
+                <div class="box">
+                <h2>Como calcular?</h2>
+                <p>O IMC é a relação entre peso e altura e o cálculo é feito de acordo com a fórmula: IMC = peso/ (altura x altura), devendo o peso estar em kg e a altura em metro, e o resultado é dado em kg/m2.</p>
+                </div><!--box-->
+
+                <div class="box">
+                <h2>Para que serve?</h2>
+                <p>Saber o IMC é importante para que se possa saber se o peso está de acordo com a altura da pessoa, o que, no caso das crianças, é importante para saber se o desenvolvimento da criança está acontecendo de acordo com o esperado, além de ser importante para saber o risco de desenvolver alguma doença.</p>
+                </div><!--box-->
+            
+            </div><!--text-->
+        </div><!-- /.flex-item1 -->
+
+        <div class="flex-item-2">
+            <div class="container-calculadora" id="calculadora">
+
+            <div class="container-peso">
+                <h1>Calcule seu IMC</h1>
+                <p>Digite Seu peso</p>
+                <input class="peso-slider" type="range">
+                <p>Peso</p>
+                <input id="weight" class="Input-number" type="number" placeholder="Digite seu peso">
+            </div><!--contianer-peso-->
+
+            <div class="container-altura">
+                <p>Digite Sua altura</p>
+                <input class="altura-slider" type="range">
+                <p>Altura</p>
+                <input id="height" class="Input-number" type="number" placeholder="Digite sua altura">
+            </div><!--contianer-altura-->   
+                
+            <div class ="calc-result">
+                <input id="btnCalc" class="buttonCalc" type="button" value="calcular">
+                <p>IMC: <span id="result"></span></p>
+                <p>O que fazer: <span id="info"></span></p>
+            </div><!--calc-result-->        
+            </div><!--contianer-calculadora-->
+        </div><!--calculator-->
+        </section><!--principal-->
+
+
+
+        <script >
+        let button = document.getElementById("btnCalc");
+
+        function btnCalc(){
+            let weight = document.getElementById("weight").value;
+            let height = document.getElementById("height").value/100;
+            let result = document.getElementById("result");
+
+            if(height !== "" && weight !== ""){
+            let imc = (weight/(height*height)).toFixed(1);
+            let msg = ""
+            let info = ""
+            if(imc < 18.5){
+                msg = " Voce esta abaixo do peso!!"
+                info = " Procure um nutricionista para adotar uma dieta hipercaloriaca e prescrever uma atividade fisica."
+            }else if(imc < 25){
+                msg = " Voce esta no peso ideal!!"
+                info = " Voce esta indo bem continue se alimentando de forma saudavel e se exercitando."
+            }else if(imc < 30){
+                msg = " Voce esta levemente acima do peso!"
+                info = " Procure um nutricionista para prescrever uma dieta mais adequada assim como exercicios fisicos."
+            }else if(imc => 30){
+                msg = " Voce esta acima do peso!"
+                info = " Procure urgentemente a ajuda de nutricionista para estruturar uma dieta hipocalorica e exercicios fisicos adequados para voce, pode ser necessario um endocrinologista tambem."
+            }
+                document.getElementById("result").innerHTML = (imc + msg);
+                document.getElementById("info").innerHTML = (info)
+            }else{
+                document.getElementById("result").innerHTML = ('Preencha todos os campos!');
+            }           
+        }button.addEventListener("click", btnCalc);
+
+        </script>
+</body>
+</html>
